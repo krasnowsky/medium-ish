@@ -10,5 +10,6 @@ src/mediumish/__pycache__
 *.pot
 *.pyc
 __pycache__
-db.sqlite3
+src/db.sqlite3
 media
+src/articles/migrations/
