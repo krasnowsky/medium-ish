@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Tags</h1>
+
+    <p>Template</p>
+
+
+    <p>
+        {{ text }}, {{ number }}
+        {{ list }}
+    </p>
+
+    <ul>
+    {% for sub in list %}
+        <li>{{ forloop.counter }} - {{ sub }}</li>
+    {% endfor %}
+
+    {% if number == 123 %}
+        <p>Number is 123</p>
+    {% endif %}
+    </ul>
+{% endblock %}
