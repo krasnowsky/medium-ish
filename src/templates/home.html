@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
+{% load embed_video_tags %}
 
 {% block content %}
-    <h1>Home page</h1>
+    {% for article in articles%}
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.content }}</p>
+        <p>{{ article.author }}</p>
+        <p>{{ article.date }}</p>
 
-    <p>Template</p>
+        {% if article.image %}
+            <img src="{{ article.image.url }}" alt="connect">
+        {% endif %}
+
+        {% for item in article.videos.all %}
+            <div class='px-3 mb-5'>
+                {% video item.url '426x240'%}
+            </div>
+        {% endfor %}
+
+        {% for tag in article.tags.all %}
+            <p>{{ tag.name }}</p>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}

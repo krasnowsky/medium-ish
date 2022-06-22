@@ -1,41 +1,36 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 
-from .models import Article
+from .models import Article, Video, Tag
+
 # Create your views here.
-def article_view(request):
-    obj = Article.objects.get(id=1)
-    '''context = {
-        'title': obj.title,
-        'content': obj.content,
-        'author': obj.author,
-        'date': obj.date,
-    }'''
-    context = {
-        'obj': obj
-    }
-    return render(request, 'article.html', context)
+'''def article_view(request):
+    obj1 = Article.objects.all()
 
-'''def article_create_view(request):
-    form = articleForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        form = articleForm()
+    print(obj1[0].videos)
 
     context = {
-        'form': form
+        'obj': obj1,
     }
-
-    return render(request, 'article_create.html', context)'''
+    return render(request, 'article.html', context)'''
 
 def home_view(request, *args, **kwargs):
-    #return HttpResponse('<h1>Hello World</h1>')
-    return render(request, 'home.html', {})
+    articles = Article.objects.all()
+    context = {
+        'articles': articles,
+    }
+    return render(request, 'home.html', context)
 
 def tags_view(request, *args, **kwargs):
-    #return HttpResponse('<h1>Hello World</h1>')
+    tags = Tag.objects.all()
+
+    tags_paginator = Paginator(tags, 5)
+
+    page_num = request.GET.get('page')
+
+    page = tags_paginator.get_page(page_num)
+
     context = {
-        'text': 'This is tag page',
-        'number': 123,
-        'list': [134, 212, 743, 43],
+        'page': page,
     }
     return render(request, 'tags.html', context)

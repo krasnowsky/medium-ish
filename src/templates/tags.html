@@ -2,22 +2,18 @@
 
 {% block content %}
     <h1>Tags</h1>
+    <h2>Page number: {{ page.number }}</h2>
 
-    <p>Template</p>
-
-
-    <p>
-        {{ text }}, {{ number }}
-        {{ list }}
-    </p>
-
-    <ul>
-    {% for sub in list %}
-        <li>{{ forloop.counter }} - {{ sub }}</li>
+    {% for tag in page.object_list %}
+        <p>{{ tag.name }}</p>
     {% endfor %}
 
-    {% if number == 123 %}
-        <p>Number is 123</p>
+    {% if page.has_previous %}
+        <a href="?page={{ page.previous_page_number }}">Previous Page</a>
     {% endif %}
-    </ul>
+
+    {% if page.has_next %}
+        <a href="?page={{ page.next_page_number }}">Next Page</a>
+    {% endif %}
+
 {% endblock %}
