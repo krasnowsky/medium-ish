@@ -26,6 +26,17 @@ def home_view(request, *args, **kwargs):
     }
     return render(request, 'home.html', context)
 
+def article_view(request, *args, **kwargs):
+    slug = kwargs.get('slug')
+
+    article = Article.objects.get(slug=slug)
+
+    context = {
+        'article': article,
+    }
+
+    return render(request, 'article_detail.html', context)
+
 def tags_view(request, *args, **kwargs):
     tags = Tag.objects.all()
 

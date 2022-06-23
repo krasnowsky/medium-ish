@@ -14,4 +14,6 @@ src/db.sqlite3
 media
 src/uploads
 src/articles/migrations/
+src/blog/migrations/
+src/db.sqlite3
 src/db.sqlite3

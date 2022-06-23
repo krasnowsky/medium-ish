@@ -5,22 +5,30 @@
 {% endblock%}
 
 {% block content %}
-    {% for tag in page.object_list %}
-        <div class="card mb-3" style="width: 100%;">
-            <div class="card-body d-flex justify-content-around align-items-center" style="font-size: 30px">
-                {{ tag.name }}
+    <div class="d-flex flex-wrap justify-content-center">
+        {% for tag in page.object_list %}
+            <div class="card mb-3" style="width: 80%;">
+                <div class="card-body d-flex justify-content-around align-items-center" style="font-size: 30px">
+                    {{ tag.name }}
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 
-    {% if page.has_previous %}
-        <a href="?page={{ page.previous_page_number }}">Previous Page</a>
-    {% endif %}
+    <div class="row d-flex justify-content-around align-items-center mt-5">
+        {% if page.has_previous %}
+            <a href="?page={{ page.previous_page_number }}" class="btn btn-warning">Previous Page</a>
+        {% else %}
+            <a class="btn btn-secondary" disabled>Previous Page</a>
+        {% endif %}
 
-    <h2>Page number: {{ page.number }}</h2>
+        <p class="mb-0">{{ page.number }}</p>
 
-    {% if page.has_next %}
-        <a href="?page={{ page.next_page_number }}">Next Page</a>
-    {% endif %}
+        {% if page.has_next %}
+            <a href="?page={{ page.next_page_number }}" class="btn btn-warning">Next Page</a>
+        {% else %}
+            <a class="btn btn-secondary" disabled>Next Page</a>
+        {% endif %}
+    </div>
 
 {% endblock %}
