@@ -1,7 +1,42 @@
-<h1>{{ article.title }}</h1>
+{% extends 'base.html' %}
+{% load embed_video_tags %}
+
+{% block content %}
+    <div class="card mb-5" style="width: 100%; background-color: #f5f5f5;">
+        <div class="card-body">
+            <h3 class="card-title">{{ article.title }}</h3>
+            <h6 class="card-subtitle text-muted">
+                <div class="row">
+                    <div class="col-md-9">By: {{ article.author }}</div>
+                    <div class="col-md-3">{{ article.date }}</div>
+                </div>
+            </h6>
+            <hr/>
+            <p class="card-text">{{ article.content }}</p>
+
+            <div class="d-flex justify-content-around mb-3">
+                {% if article.image %}
+                    <img src="{{ article.image.url }}" alt="connect">
+                {% endif %}
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-around">
+                {% for item in article.videos.all %}
+                    <div class="px-3 mb-5">
+                        {% video item.url '426x240'%}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <hr/>
+
+            {% for tag in article.tags.all %}
+                <div class="btn btn-warning">{{ tag.name }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include 'comments.html' with url=article.slug %}
+{% endblock %}
 
 
-
-
-
-{% include 'comments.html' with url=article.slug %}

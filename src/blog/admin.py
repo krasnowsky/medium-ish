@@ -8,3 +8,5 @@ admin.site.register(Author)
 admin.site.register(Tag)
 admin.site.register(Note)
 admin.site.register(Video)
+
+
