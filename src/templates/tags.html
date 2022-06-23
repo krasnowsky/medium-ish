@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <h1>Tags</h1>
-    <h2>Page number: {{ page.number }}</h2>
+{% block title %}
+    Tags
+{% endblock%}
 
+{% block content %}
     {% for tag in page.object_list %}
-        <p>{{ tag.name }}</p>
+        <div class="card mb-3" style="width: 100%;">
+            <div class="card-body d-flex justify-content-around align-items-center" style="font-size: 30px">
+                {{ tag.name }}
+            </div>
+        </div>
     {% endfor %}
 
     {% if page.has_previous %}
         <a href="?page={{ page.previous_page_number }}">Previous Page</a>
     {% endif %}
+
+    <h2>Page number: {{ page.number }}</h2>
 
     {% if page.has_next %}
         <a href="?page={{ page.next_page_number }}">Next Page</a>

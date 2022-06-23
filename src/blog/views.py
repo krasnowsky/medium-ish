@@ -16,8 +16,13 @@ from .models import Article, Video, Tag
 
 def home_view(request, *args, **kwargs):
     articles = Article.objects.all()
+
+    articles_paginator = Paginator(articles, 5)
+    page_num = request.GET.get('page')
+    page = articles_paginator.get_page(page_num)
+
     context = {
-        'articles': articles,
+        'page': page,
     }
     return render(request, 'home.html', context)
 
@@ -25,9 +30,7 @@ def tags_view(request, *args, **kwargs):
     tags = Tag.objects.all()
 
     tags_paginator = Paginator(tags, 5)
-
     page_num = request.GET.get('page')
-
     page = tags_paginator.get_page(page_num)
 
     context = {
