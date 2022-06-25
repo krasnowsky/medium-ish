@@ -10,10 +10,10 @@
         {% for article in page.object_list%}
             <div class="card mb-5" style="width: 100%; background-color: #f5f5f5;">
                 <div class="card-body">
-                    <a href='/article/{{article.slug}}'><h3 class="card-title">{{ article.title }}</h3></a>
+                    <a href='/article/{{article.slug}}' style="color: black;"><h3 class="card-title">{{ article.title }}</h3></a>
                     <h6 class="card-subtitle text-muted">
                         <div class="row">
-                            <div class="col-md-9">By: {{ article.author }}</div>
+                            <a class="col-md-9" href='/author/{{article.author.slug}}' style="color: black;">By: {{ article.author }}</a>
                             <div class="col-md-3">{{ article.date }}</div>
                         </div>
                     </h6>
