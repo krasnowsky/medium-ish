@@ -4,15 +4,6 @@ from django.core.paginator import Paginator
 from .models import Article, Tag, Author
 
 # Create your views here.
-'''def article_view(request):
-    obj1 = Article.objects.all()
-
-    print(obj1[0].videos)
-
-    context = {
-        'obj': obj1,
-    }
-    return render(request, 'article.html', context)'''
 
 def home_view(request, *args, **kwargs):
     articles = Article.objects.all()

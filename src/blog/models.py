@@ -33,7 +33,7 @@ class Author(models.Model):
         return reverse('author:detail_author',kwargs={'slug':self.slug})
 
     def save(self, *args, **kwargs):
-        if not self.id: # if this is a new item
+        if not self.id:
             newslug = '{0} {1}'.format(self.name, self.surname)
             self.slug = slugify(unidecode(newslug))
         super(Author, self).save(*args, **kwargs)
@@ -62,7 +62,7 @@ class Article(models.Model):
         return reverse('article:detail',kwargs={'slug':self.slug})
 
     def save(self, *args, **kwargs):
-        if not self.id: # if this is a new item
+        if not self.id:
             newslug = '{0} {1}'.format(self.title, self.author)
             self.slug = slugify(unidecode(newslug))
         super(Article, self).save(*args, **kwargs)

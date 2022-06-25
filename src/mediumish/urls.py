@@ -21,8 +21,8 @@ from django.conf.urls.static import static
 from blog.views import home_view, tags_view, article_view, author_view
 
 urlpatterns = [
-    path('', home_view),
-    path('tags/', tags_view),
+    path('', home_view, name='home_page'),
+    path('tags/', tags_view, name='tag_page'),
     path('article/<slug:slug>', article_view, name='detail'),
     path('author/<slug:slug>', author_view, name='detail_author'),
     path('admin/', admin.site.urls),
