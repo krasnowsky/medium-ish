@@ -17,16 +17,26 @@ class Tag(models.Model):
     class Meta:
         ordering = ['-date']
 
+class Note(models.Model):
+    content = models.TextField()
 
 class Author(models.Model):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
+    note = models.ForeignKey(Note, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, blank=True, editable=False)
 
     def __str__(self):
         return self.name + ' ' + self.surname
 
-class Note(models.Model):
-    content = models.TextField()
+    def get_absolute_url(self):
+        return reverse('author:detail_author',kwargs={'slug':self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.id: # if this is a new item
+            newslug = '{0} {1}'.format(self.name, self.surname)
+            self.slug = slugify(unidecode(newslug))
+        super(Author, self).save(*args, **kwargs)
 
 class Video(models.Model):
     title = models.CharField(max_length=100, null=True)
@@ -51,11 +61,11 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('article:detail',kwargs={'slug':self.slug})
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.id: # if this is a new item
             newslug = '{0} {1}'.format(self.title, self.author)
             self.slug = slugify(unidecode(newslug))
-        super(Article, self).save()
+        super(Article, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['-date']

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 
-from .models import Article, Video, Tag
+from .models import Article, Tag, Author
 
 # Create your views here.
 '''def article_view(request):
@@ -36,6 +36,17 @@ def article_view(request, *args, **kwargs):
     }
 
     return render(request, 'article_detail.html', context)
+
+def author_view(request, *args, **kwargs):
+    slug = kwargs.get('slug')
+
+    author = Author.objects.get(slug=slug)
+
+    context = {
+        'author': author,
+    }
+
+    return render(request, 'author_detail.html', context)
 
 def tags_view(request, *args, **kwargs):
     tags = Tag.objects.all()
